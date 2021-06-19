@@ -49,3 +49,6 @@ def lemmatize_text(text):
     """Lemmatizing Text."""
     stemmer = WordNetLemmatizer()
     return [stemmer.lemmatize(word) for word in text]
+
+
+# TODO Stemming
