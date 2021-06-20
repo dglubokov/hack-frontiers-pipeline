@@ -1,5 +1,9 @@
 
 import pandas as pd
+import gensim
+import gensim.corpora as corpora
+from gensim.utils import simple_preprocess
+from gensim.models import CoherenceModel
 
 # PREPROCESSING ?
 # make Dictionary from a list of sentences
@@ -9,7 +13,15 @@ import pandas as pd
 # Trigrams
 
 # id2word
-# id2word = corpora.Dictionary(data_ready)
+def assign_word_ids(text):
+    # Create Dictionary
+    id2word = corpora.Dictionary(data_lemmatized)
+
+    # Create Corpus
+    texts = data_lemmatized
+
+    # Term Document Frequency
+    return [[(id2word[id], freq) for id, freq in cp] for cp in corpus[:1]]
 
 # Create Corpus: Term Document Frequency
 # corpus = [id2word.doc2bow(text) for text in data_ready]
@@ -56,7 +68,7 @@ def lda_build(corpus, id2word):
                                            iterations=100,
                                            per_word_topics=True)
 
-def lda_get_dominant_topics(ldamodel=None, corpus=corpus, texts=data):
+def lda_get_dominant_topics(ldamodel, corpus, texts):
     """
     df_topic_sents_keywords = format_topics_sentences(ldamodel=lda_model, corpus=corpus, texts=data_ready)
     df_dominant_topic = df_topic_sents_keywords.reset_index()
